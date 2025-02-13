@@ -111,6 +111,7 @@
             padding: 10px;
             text-align: center;
             font-size: 14px;
+            border-radius:10px
         }
         
     </style>
@@ -271,7 +272,7 @@
 </script>
 <script>
       async function fetchWeather(lat, lon) {
-        const url ="https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m";
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m&hourly=relative_humidity_2m&timezone=auto`;
 
         try {
             const response = await fetch(url);

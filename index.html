@@ -92,19 +92,28 @@
             height: 30px;
             margin: 5px;
         }
-        @media (max-width:1024px){
-            .product-list{
-                grid-template-columns: repeat(3,3fr);
-            }
-        }
-        @media (max-width:480px){
-            .product-list{
-                grid-template-columns: repeat(2,1fr);
-            }
-        }
-        .cart-section{
-            width:70%;
-        }
+        @media (max-width: 1024px) {
+                    .product-list {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                }
+                @media (max-width: 768px) {
+                    header .menu {
+                        display: none;
+                    }
+                    header .hamburger {
+                        display: block;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .product-list {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    .cart-section {
+                        width: 90%;
+                        margin: auto;
+                    }
+                }
         #weather-widget {
             background: #007bff;
             color: white;
@@ -126,6 +135,7 @@
 
 <main>
     <h2 style="text-align: center;">Products</h2>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
     <div class="product-list" id="product-list"></div>
 
     <div class="cart-section">

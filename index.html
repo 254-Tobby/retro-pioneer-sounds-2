@@ -10,7 +10,7 @@
             margin: 70px;
             border-style: solid;
             padding: 10px;
-            background-color: rgba(167, 72, 196, 0.724);
+            background-color: rgba(25, 33, 105, 0.724);
 
         }
         .logo{
@@ -23,7 +23,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: purple;
+            background: rgb(49, 128, 211);
             color: white;
             padding: 10px 20px;
             margin-left: 20px;
@@ -31,7 +31,7 @@
         }
 
         footer {
-            background:purple;
+            background:rgb(61, 138, 220);
             color: white;
             text-align: center;
         }
@@ -95,21 +95,20 @@
         @media (max-width: 1024px) {
                     .product-list {
                         grid-template-columns: repeat(3, 1fr);
+                        margin:auto;
                     }
                 }
                 @media (max-width: 768px) {
-                    header .menu {
-                        display: none;
-                    }
-                    header .hamburger {
-                        display: block;
-                    }
+                    .product-list {
+                        grid-template-columns: repeat(2, 1fr); 
+                        margin:auto; 
                 }
                 @media (max-width: 480px) {
                     .product-list {
-                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-columns: repeat(1, 1fr);
+                        margin:auto;
                     }
-                    .cart-section {
+                    .cart-section,.Payment-Section {
                         width: 90%;
                         margin: auto;
                     }
@@ -135,7 +134,6 @@
 
 <main>
     <h2 style="text-align: center;">Products</h2>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
     <div class="product-list" id="product-list"></div>
 
     <div class="cart-section">
@@ -157,8 +155,19 @@
             <p>Discount: $<span id="discount">0.00</span></p>
             <p>Shipping: $<span id="shipping-cost">10.00</span></p>
             <h3>Total: $<span id="total">0.00</span></h3>
-            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            <button class="checkout-btn" onclick="proceedToPayment()">Proceed to Payment</button> 
         </div>
+    </div>
+    <div class="payment-section" id="payment-section">
+        <h2>Select Payment Method</h2>
+        <div class="payment-methods">
+            <label><input type="radio" name="payment" value="PayPal"> PayPal</label><br>
+            <label><input type="radio" name="payment" value="Visa"> Visa</label><br>
+            <label><input type="radio" name="payment" value="Mobile Money"> Mobile Money</label>
+        </div>
+        <br>
+        <button class="pay-btn" onclick="completePayment()">Complete Payment</button>
+        <h3 id="payment-status" style="color: green; display: none;">Payment Complete!</h3>
     </div>
 </main>
 
@@ -271,7 +280,21 @@
         saveCart();
         renderCart();
     }
+    function proceedToPayment() {
+        document.getElementById("cart-section").style.display = "none";
+        document.getElementById("payment-section").style.display = "block";
+    }
 
+    function completePayment() {
+        let selectedPayment = document.querySelector('input[name="payment"]:checked');
+        if (!selectedPayment) {
+            alert("Please select a payment method!");
+            return;
+        }
+        document.getElementById("payment-status").style.display = "block";
+        cart = [];
+        saveCart();
+    }
     document.getElementById("voucher").addEventListener("input", updateSummary);
     document.querySelectorAll('input[name="shipping"]').forEach(radio => {
         radio.addEventListener("change", updateSummary);

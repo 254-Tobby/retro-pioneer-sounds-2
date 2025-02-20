@@ -294,28 +294,8 @@
         saveCart();
         renderCart();
     }
-    function proceedToPayment() {
-        document.getElementById("cart-section").style.display = "none";
-        document.getElementById("payment-section").style.display = "block";
-    }
-
-    function completePayment() {
-        let selectedPayment = document.querySelector('input[name="payment"]:checked');
-        if (!selectedPayment) {
-            alert("Please select a payment method!");
-            return;
-        }
-        document.getElementById("payment-status").style.display = "block";
-        cart = [];
-        saveCart();
-    }
-    document.getElementById("voucher").addEventListener("input", updateSummary);
-    document.querySelectorAll('input[name="shipping"]').forEach(radio => {
-        radio.addEventListener("change", updateSummary);
-    });
     document.getElementById("total-amount").innerText = localStorage.getItem("cartTotal") || "0.00";
-
-function redirectToPayment(method) {
+    function redirectToPayment(method) {
     let paymentURL = "";
     
     if (method === "paypal") {
@@ -333,6 +313,12 @@ function redirectToPayment(method) {
     }
 }
     
+        saveCart();
+    }
+    document.getElementById("voucher").addEventListener("input", updateSummary);
+    document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+        radio.addEventListener("change", updateSummary);
+    });
     renderProducts();
     renderCart();
 

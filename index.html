@@ -162,25 +162,17 @@
         </div>
     </div>
     <div class="payment-section" id="payment-section">
-        <h2>Select Payment Method</h2>
-        <div class="payment-methods">
-            <label><input type="radio" name="payment" value="PayPal"> PayPal</label><br>
-            <label><input type="radio" name="payment" value="Visa"> Visa</label><br>
-            <label><input type="radio" name="payment" value="Mobile Money"> Mobile Money</label>
-        </div>
-        <br>
-        <button class="pay-btn" onclick="completePayment()">Complete Payment</button>
-        <h3 id="payment-status" style="color: green; display: none;">Payment Complete!</h3>
-    </div>
-    <div class="checkout-container">
-        <h2>Checkout</h2>
-        <p>Total Amount: <strong>$<span id="total-amount">0.00</span></strong></p>
-
         <h3>Select Payment Method</h3>
         <div class="payment-options">
             <button class="paypal" onclick="redirectToPayment('paypal')">Pay with PayPal</button>
             <button class="visa" onclick="redirectToPayment('visa')">Pay with Visa</button>
-            <button class="mobile-money" onclick="redirectToPayment('mobile-money')">Pay with Mobile Money</button>
+            <button class="m-pesa" onclick="redirectToPayment('m-pesa')">Pay with Mobile Money</button>
+            <div class="checkout-container">
+        <h2>Checkout</h2>
+        <p>Total Amount: <strong>$<span id="total-amount">0.00</span></strong></p>
+        <button class="pay-btn" onclick="completePayment()">Complete Payment</button>
+        <h3 id="payment-status" style="color: green; display: none;">Payment Complete!</h3>
+
         </div>
     </div>
 </main>
@@ -297,14 +289,13 @@
     document.getElementById("total-amount").innerText = localStorage.getItem("cartTotal") || "0.00";
     function redirectToPayment(method) {
     let paymentURL = "";
-    
+    const totalAmount=document.getElementById("total").innerText;
     if (method === "paypal") {
-        paymentURL = "https://www.paypal.com/checkout";
+        paymentURL = "https://www.paypal.com/checkout?amount=${totalAmount}";
     } else if (method === "visa") {
-        paymentURL = "https://www.visa.com/pay";
+        paymentURL = "https://www.visa.co.ke/checkout?amount=${totalAmount}";
     } else if (method === "mobile-money") {
-        paymentURL = "https://www.mobilemoney.com/pay";
-    }
+        paymentURL = "https://www.safaricom.co.ke/main-mpesa/m-pesa-services/m-pesa-go/checkout?amount=${totalAmount};    }
 
     if (paymentURL) {
         window.location.href = paymentURL;

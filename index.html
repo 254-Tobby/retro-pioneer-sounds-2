@@ -274,17 +274,6 @@
         document.getElementById("shipping-cost").innerText = shippingCost.toFixed(2);
         document.getElementById("total").innerText = total.toFixed(2);
     }
-
-    function checkout() {
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-        }
-        alert("Checkout successful! Total: $" + document.getElementById("total").innerText);
-        cart.length = 0;
-        saveCart();
-        renderCart();
-    }
     document.getElementById("total-amount").innerText = localStorage.getItem("cartTotal") || "0.00";
     function redirectToPayment(method) {
     let paymentURL = "";
@@ -303,6 +292,16 @@
         alert("Invalid payment method.");
     }
     saveCart();
+    function checkout() {
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+        alert("Checkout successful! Total: $" + document.getElementById("total").innerText);
+        cart.length = 0;
+        saveCart();
+        renderCart();
+    }
     }
     document.getElementById("voucher").addEventListener("input", updateSummary);
     document.querySelectorAll('input[name="shipping"]').forEach(radio => {

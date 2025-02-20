@@ -121,6 +121,9 @@
             font-size: 14px;
             border-radius: 10px;
         }
+        .paypal{background-color: #007bff;color: #f9f9f9;}
+        .visa{background-color: #142C8E;color:white;}
+        .mobile-money{background-color: #ffd700;color:black;}
     </style>
 </head>
 <body>
@@ -168,6 +171,17 @@
         <br>
         <button class="pay-btn" onclick="completePayment()">Complete Payment</button>
         <h3 id="payment-status" style="color: green; display: none;">Payment Complete!</h3>
+    </div>
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+        <p>Total Amount: <strong>$<span id="total-amount">0.00</span></strong></p>
+
+        <h3>Select Payment Method</h3>
+        <div class="payment-options">
+            <button class="paypal" onclick="redirectToPayment('paypal')">Pay with PayPal</button>
+            <button class="visa" onclick="redirectToPayment('visa')">Pay with Visa</button>
+            <button class="mobile-money" onclick="redirectToPayment('mobile-money')">Pay with Mobile Money</button>
+        </div>
     </div>
 </main>
 
@@ -303,6 +317,25 @@
     
     renderProducts();
     renderCart();
+    document.getElementById("total-amount").innerText = localStorage.getItem("cartTotal") || "0.00";
+
+function redirectToPayment(method) {
+    let paymentURL = "";
+    
+    if (method === "paypal") {
+        paymentURL = "https://www.paypal.com/checkout";
+    } else if (method === "visa") {
+        paymentURL = "https://www.visa.com/pay";
+    } else if (method === "mobile-money") {
+        paymentURL = "https://www.mobilemoney.com/pay";
+    }
+
+    if (paymentURL) {
+        window.location.href = paymentURL;
+    } else {
+        alert("Invalid payment method.");
+    }
+}
 
     async function fetchWeather(lat, lon) {
             const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto`;

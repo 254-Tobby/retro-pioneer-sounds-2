@@ -283,7 +283,7 @@
     } else if (method === "visa") {
         paymentURL = "https://www.visa.co.ke/checkout?amount=${totalAmount}";
     } else if (method === "mobile-money") {
-        paymentURL = "https://www.safaricom.co.ke/main-mpesa/m-pesa-services/m-pesa-go/checkout?amount=${totalAmount}";
+        paymentURL = "https://www.safaricom.co.ke/main-mpesa/checkout?amount=${totalAmount}";
     }
 
     if (paymentURL) {

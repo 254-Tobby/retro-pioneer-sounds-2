@@ -166,12 +166,12 @@
             <button class="paypal" onclick="redirectToPayment('paypal')">Pay with PayPal</button>
             <button class="visa" onclick="redirectToPayment('visa')">Pay with Visa</button>
             <button class="m-pesa" onclick="redirectToPayment('m-pesa')">Pay with M-pesa</button>
-            <div class="checkout-container">
-        <h2>Checkout</h2>
-        <p>Total Amount: <strong>$<span id="total-amount">"Total: $"/span></strong></p>
-        <button class="checkout-btn" onclick="checkout()">Checkout</button> 
-        <h3 id="payment-status" style="color: green; display: none;">Payment Complete!</h3>
-
+        </div>  
+        <div class="checkout-container">
+            <h2>Checkout</h2>
+            <p>Total Amount: <strong>$<span id="total-amount">0.00</span></strong></p>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button> 
+            <h3 id="payment-status" style="color: green; display: none;">Payment Complete!</h3>
         </div>
     </div>
 </main>
@@ -291,17 +291,18 @@
     } else {
         alert("Invalid payment method.");
     }
-    saveCart();
+}
     function checkout() {
         if (cart.length === 0) {
             alert("Your cart is empty!");
             return;
         }
-        alert("Checkout successful! Total: $" + document.getElementById("total").innerText);
+        const totalAmount=document.getElementById("total").innerText
+        alert("Checkout successful! Total: $" + totalAmount);
         cart.length = 0;
         saveCart();
         renderCart();
-    }
+        document.getElementById("payment-status").style.display="block";
     }
     document.getElementById("voucher").addEventListener("input", updateSummary);
     document.querySelectorAll('input[name="shipping"]').forEach(radio => {

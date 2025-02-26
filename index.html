@@ -229,9 +229,9 @@
     }
 
     function addToCart(id) {
-        const product = products.find(p => p.id === id);
         const quantityInput=document.getElementById("quantity-${id}");
         const quantity=parseInt(quantityInput.value);
+        const product = products.find(p => p.id === id);
         const existingItem = cart.find(item => item.id === id);
         if (existingItem) {
             existingItem.quantity+=quantity;

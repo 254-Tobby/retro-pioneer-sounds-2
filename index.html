@@ -229,9 +229,9 @@
     }
 
     function addToCart(id) {
-        const product = products.find(p => p.id === id);
         const quantityInput=document.getElementById("quantity-${id}");
         const quantity=parseInt(quantityInput.value);
+        const product = products.find(p => p.id === id);
         const existingItem = cart.find(item => item.id === id);
         if (existingItem) {
             existingItem.quantity+=quantity;
@@ -262,7 +262,7 @@
             const cartElement = document.createElement("div");
             cartElement.classList.add("cart-item");
             cartElement.innerHTML = `
-                <span>${item.name} ($${item.price} x ${item.quantity})</span>
+            <span>${item.name} ($${item.price} x ${item.quantity})</span>
                 <button onclick="removeFromCart(${item.id})">Remove</button>
             `;
             cartItems.appendChild(cartElement);

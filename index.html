@@ -223,7 +223,6 @@
                 <label for="quantity-${product.id}">Quantity:</label>
                 <input type="number" id="quantity-${product.id}" value="1" min="1">
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
-                <button onclick="removeFromCart(${product.id})">Remove from Cart</button>
             `;
             productList.appendChild(productElement);
         });
